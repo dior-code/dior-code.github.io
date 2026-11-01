@@ -24,7 +24,6 @@
             align-items: center;
             min-height: 100vh;
         }
-        /* 顶部导航栏 */
         nav {
             width: 100%;
             background: rgba(30, 41, 59, 0.8);
@@ -36,6 +35,7 @@
             display: flex;
             justify-content: center;
             gap: 24px;
+            z-index: 100;
         }
         nav a {
             color: var(--text-muted);
@@ -44,31 +44,46 @@
             font-size: 15px;
             transition: color 0.2s;
         }
-        nav a:hover, nav a.active {
-            color: var(--accent);
-        }
-        /* 主内容卡片 */
+        nav a:hover, nav a.active { color: var(--accent); }
+        
         .container {
-            margin-top: 60px;
+            margin: 40px 0;
             background: var(--card-bg);
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
+            max-width: 540px;
             width: 85%;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
         }
-        h1 { font-size: 26px; margin-bottom: 12px; }
-        p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
-        .tag {
-            display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin-top: 10px;
+        h1 { font-size: 28px; margin-bottom: 12px; color: var(--text-main); }
+        .hero-desc { color: var(--text-muted); font-size: 16px; line-height: 1.7; margin-bottom: 24px; }
+        .highlight { color: var(--accent); font-weight: 600; }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 24px;
         }
+        .btn {
+            background: var(--accent);
+            color: #0f172a;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: var(--accent-hover); }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.05); }
     </style>
 </head>
 <body>
@@ -80,12 +95,20 @@
         <a href="projects.html">Projects</a>
     </nav>
 
-    <!-- 首页卡片内容 -->
+    <!-- 首页 主卡片 -->
     <div class="container">
-        <h1>👋 Welcome to My Digital Hub</h1>
-        <p>Hi, I'm <strong>dior-code</strong>. This is my personal space on the web built entirely from scratch.</p>
-        <p>Feel free to explore around using the navigation bar above!</p>
-        <span class="tag">🚀 Status: Building & Exploring</span>
+        <h1>👋 Welcome to My Digital HQ</h1>
+        <p class="hero-desc">
+            Hi, I'm <span class="highlight">dior-code</span>. I build web experiences and document my creator journey from zero to one.
+        </p>
+        <p style="font-size: 14px; color: var(--text-muted);">
+            This website is my personal sandbox for projects, ideas, and content.
+        </p>
+
+        <div class="cta-buttons">
+            <a href="about.html" class="btn">Read My Story</a>
+            <a href="projects.html" class="btn btn-secondary">Explore Projects</a>
+        </div>
     </div>
 
 </body>
