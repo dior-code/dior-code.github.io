@@ -227,6 +227,7 @@
 
         <div class="button-group">
             <button class="btn btn-primary" id="openAbout">About Me</button>
+            <button class="btn btn-secondary" id="openBlog">Blog</button>
             <a href="https://github.com/dior-code" target="_blank" class="btn btn-secondary">GitHub</a>
         </div>
     </div>
@@ -256,6 +257,23 @@
             </div>
         </div>
     </div>
+    
+    <!-- 点击 Blog 后弹出的新浮窗 -->
+    <div class="modal-overlay" id="blogModal">
+        <div class="modal-card">
+            <button class="close-btn" id="closeBlog">&times;</button>
+            <h2 class="modal-title">📝 My Blog</h2>
+            <div class="modal-subtitle">Thoughts • Notes • Updates</div>
+
+            <div class="modal-content">
+                <p><strong>📅 November 2026: Setting Sail</strong><br>
+                Today I officially started building my digital home from scratch. No prior experience, just pure curiosity and code!</p>
+                
+                <p><strong>💡 Coming Soon:</strong><br>
+                More building logs, trial-and-error stories, and tech notes will be posted here.</p>
+            </div>
+        </div>
+    </div>
 
     <!-- 交互 JavaScript 逻辑 -->
     <script>
@@ -279,6 +297,26 @@
                 modal.classList.remove('active');
             }
         });
+    </script>
+
+    <script>
+    // --- 原有的 About 弹窗逻辑 ---
+    const openBtn = document.getElementById('openAbout');
+    const closeBtn = document.getElementById('closeAbout');
+    const modal = document.getElementById('aboutModal');
+
+    openBtn.addEventListener('click', () => { modal.classList.add('active'); });
+    closeBtn.addEventListener('click', () => { modal.classList.remove('active'); });
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+
+    // --- 👇 新增的 Blog 弹窗逻辑（完全一样的套路） ---
+    const openBlogBtn = document.getElementById('openBlog');
+    const closeBlogBtn = document.getElementById('closeBlog');
+    const blogModal = document.getElementById('blogModal');
+
+    openBlogBtn.addEventListener('click', () => { blogModal.classList.add('active'); });
+    closeBlogBtn.addEventListener('click', () => { blogModal.classList.remove('active'); });
+    blogModal.addEventListener('click', (e) => { if (e.target === blogModal) blogModal.classList.remove('active'); });
     </script>
 </body>
 </html>
