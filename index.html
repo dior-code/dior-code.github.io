@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dior-code | Starry HQ</title>
+    <title>dior-code | Digital HQ</title>
     <style>
         :root {
             --bg-color: #0b0d17;
@@ -22,13 +22,13 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* 背景星空渐变与光晕 */
+        /* 背景星空光晕 */
         body::before {
             content: '';
             position: fixed;
@@ -42,51 +42,8 @@
             filter: blur(50px);
         }
 
-        /* 顶部毛玻璃导航栏 */
-        nav {
-            width: 100%;
-            background: rgba(11, 13, 23, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 18px 0;
-            position: sticky;
-            top: 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            z-index: 100;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        nav a:hover, nav a.active {
-            color: #ffffff;
-            text-shadow: 0 0 12px var(--accent-glow);
-        }
-
-        nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            box-shadow: 0 0 8px var(--accent);
-            border-radius: 2px;
-        }
-
-        /* 居中主容器 */
+        /* 居中主容器（单页卡片） */
         .container {
-            margin: 80px auto 40px;
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -160,14 +117,6 @@
 </head>
 <body>
 
-    <!-- 顶部导航 -->
-    <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About Me</a>
-        <a href="projects.html">Projects</a>
-    </nav>
-
-    <!-- 卡片主体 -->
     <div class="container">
         <h1>👋 Welcome to My Digital HQ</h1>
         <p class="hero-desc">
@@ -175,8 +124,8 @@
         </p>
 
         <div class="cta-buttons">
-            <a href="about.html" class="btn">Read My Story</a>
-            <a href="projects.html" class="btn btn-secondary">Explore Projects</a>
+            <a href="https://github.com/dior-code" target="_blank" class="btn">GitHub</a>
+            <a href="mailto:your-email@example.com" class="btn btn-secondary">Contact Me</a>
         </div>
     </div>
 
