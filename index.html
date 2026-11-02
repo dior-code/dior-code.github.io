@@ -228,6 +228,7 @@
         <div class="button-group">
             <button class="btn btn-primary" id="openAbout">About Me</button>
             <button class="btn btn-secondary" id="openBlog">Blog</button>
+            <button class="btn btn-secondary" id="openLinks">Links</button>
             <a href="https://github.com/dior-code" target="_blank" class="btn btn-secondary">GitHub</a>
         </div>
     </div>
@@ -274,7 +275,23 @@
             </div>
         </div>
     </div>
+    <!-- 点击 Links 后弹出的社媒矩阵浮窗 -->
+    <div class="modal-overlay" id="linksModal">
+        <div class="modal-card">
+            <button class="close-btn" id="closeLinks">&times;</button>
+            <h2 class="modal-title">🔗 My Links</h2>
+            <div class="modal-subtitle">Connect with me across the web</div>
 
+            <div class="modal-content" style="display: flex; flex-direction: column; gap: 10px;">
+                <p style="margin-bottom: 8px; font-size: 14px;">Find me on these platforms:</p>
+                <!-- 替换成你自己的真实社媒链接 -->
+                <a href="https://youtube.com/@your-youtube-id" target="_blank" class="btn btn-secondary" style="text-align: center; display: block; text-decoration: none;">📺 YouTube</a>
+                <a href="https://twitter.com/your-twitter-id" target="_blank" class="btn btn-secondary" style="text-align: center; display: block; text-decoration: none;">🐦 Twitter / X</a>
+                <a href="https://instagram.com/your-instagram-id" target="_blank" class="btn btn-secondary" style="text-align: center; display: block; text-decoration: none;">📸 Instagram</a>
+                <a href="https://discord.gg/your-discord-invite" target="_blank" class="btn btn-secondary" style="text-align: center; display: block; text-decoration: none;">💬 Discord</a>
+            </div>
+        </div>
+    </div>
     <!-- 交互 JavaScript 逻辑 -->
     <script>
         const openBtn = document.getElementById('openAbout');
@@ -332,6 +349,23 @@
         blogModal.addEventListener('click', (e) => {
             if (e.target === blogModal) {
                 blogModal.classList.remove('active');
+            }
+        });
+
+        // --- 3. 社交链接 (Links) 的弹窗逻辑 ---
+        const openLinksBtn = document.getElementById('openLinks');
+        const closeLinksBtn = document.getElementById('closeLinks');
+        const linksModal = document.getElementById('linksModal');
+
+        openLinksBtn.addEventListener('click', () => {
+            linksModal.classList.add('active');
+        });
+        closeLinksBtn.addEventListener('click', () => {
+            linksModal.classList.remove('active');
+        });
+        linksModal.addEventListener('click', (e) => {
+            if (e.target === linksModal) {
+                linksModal.classList.remove('active');
             }
         });
     </script>
