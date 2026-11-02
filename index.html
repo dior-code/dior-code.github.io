@@ -299,24 +299,41 @@
         });
     </script>
 
+    <!-- 交互 JavaScript 逻辑（整合版） -->
     <script>
-    // --- 原有的 About 弹窗逻辑 ---
-    const openBtn = document.getElementById('openAbout');
-    const closeBtn = document.getElementById('closeAbout');
-    const modal = document.getElementById('aboutModal');
+        // --- 1. 关于我 (About) 的弹窗逻辑 ---
+        const openAboutBtn = document.getElementById('openAbout');
+        const closeAboutBtn = document.getElementById('closeAbout');
+        const aboutModal = document.getElementById('aboutModal');
 
-    openBtn.addEventListener('click', () => { modal.classList.add('active'); });
-    closeBtn.addEventListener('click', () => { modal.classList.remove('active'); });
-    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+        openAboutBtn.addEventListener('click', () => {
+            aboutModal.classList.add('active');
+        });
+        closeAboutBtn.addEventListener('click', () => {
+            aboutModal.classList.remove('active');
+        });
+        aboutModal.addEventListener('click', (e) => {
+            if (e.target === aboutModal) {
+                aboutModal.classList.remove('active');
+            }
+        });
 
-    // --- 👇 新增的 Blog 弹窗逻辑（完全一样的套路） ---
-    const openBlogBtn = document.getElementById('openBlog');
-    const closeBlogBtn = document.getElementById('closeBlog');
-    const blogModal = document.getElementById('blogModal');
+        // --- 2. 博客 (Blog) 的弹窗逻辑 ---
+        const openBlogBtn = document.getElementById('openBlog');
+        const closeBlogBtn = document.getElementById('closeBlog');
+        const blogModal = document.getElementById('blogModal');
 
-    openBlogBtn.addEventListener('click', () => { blogModal.classList.add('active'); });
-    closeBlogBtn.addEventListener('click', () => { blogModal.classList.remove('active'); });
-    blogModal.addEventListener('click', (e) => { if (e.target === blogModal) blogModal.classList.remove('active'); });
+        openBlogBtn.addEventListener('click', () => {
+            blogModal.classList.add('active');
+        });
+        closeBlogBtn.addEventListener('click', () => {
+            blogModal.classList.remove('active');
+        });
+        blogModal.addEventListener('click', (e) => {
+            if (e.target === blogModal) {
+                blogModal.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
