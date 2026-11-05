@@ -156,16 +156,30 @@
         }
 
         .modal-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* 初始居中 */
             background: var(--modal-bg);
             width: 90%;
-            max-width: 480px;
+            max-width: 420px;
             border-radius: 20px;
-            padding: 36px 32px;
+            padding: 28px;
             border: 1px solid var(--border-color);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
-            position: relative;
-            transform: scale(0.95);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: none; /* 默认隐藏 */
+            z-index: 100;
+            user-select: none; /* 防止拖拽时选中文字 */
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move; /* 鼠标放上去变成拖拽手势 */
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 16px;
         }
 
         .modal-overlay.active .modal-card {
@@ -241,27 +255,33 @@
         </p>
 
         <div class="button-group">
-            <button class="btn btn-primary" id="openAbout">About</button>
-            <button class="btn btn-primary" id="openBlog">Blog</button>
-            <button class="btn btn-primary" id="openLinks">Links</button>
+            <button class="btn btn-primary" onclick="openModal('aboutModal')">About</button>
+            <button class="btn btn-primary" onclick="openModal('blogModal')">Blog</button>
+            <button class="btn btn-primary" onclick="openModal('linksModal')">Links</button>
             <a href="https://github.com/dior-code" target="_blank" class="btn btn-primary">GitHub</a>
         </div>
     </div>
 
     <!-- 2. 弹窗：About -->
-    <div class="modal-overlay" id="aboutModal">
-        <div class="modal-card" style="text-align: center;">
-            <button class="close-btn" id="closeAbout">&times;</button>
-            
-            <!-- 居中头像（请确保你的仓库里有一张叫 avatar.jpg 的图片，或者修改这里的图片链接） -->
-            <img src="avatar.jpg" alt="Dior" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin: 0 auto 12px auto; display: block; border: 2px solid var(--accent);">
-            
-            <!-- 名字 -->
-            <h2 class="modal-title" style="text-align: center; color: var(--text-main); font-size: 24px; margin-bottom: 4px;">Dior</h2>
-            <div class="modal-subtitle" style="text-align: center; margin-bottom: 20px;">Creator • Developer • Lifelong Learner</div>
-
-            <!-- 详细说明（全英文） -->
-            <div class="modal-content" style="text-align: left;">
+    <!-- 1. 去掉了 modal-overlay，直接把 id 放到 modal-card 上 -->
+    <div class="modal-card" id="aboutModal">
+        
+            <!-- 2. 新增一个顶部拖拽栏：以后你用鼠标按住这个横条，就可以把窗口随便拖来拖去了 -->
+            <div class="modal-header">
+                <span class="modal-title" style="font-size: 18px;">👤 About</span>
+                <!-- 关闭按钮改成用 onclick 控制 -->
+                <button class="close-btn" onclick="closeModal('aboutModal')" style="position: static;">&times;</button>
+             </div>
+                    
+            <!-- 头像与名字区域（包含居中样式） -->
+            <div style="text-align: center;">
+                <img src="avatar.jpg" alt="Dior" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin: 0 auto 12px auto; display: block; border: 2px solid var(--accent);">
+                 <h2 style="color: var(--text-main); font-size: 24px; margin-bottom: 4px;">Dior</h2>
+                 <div class="modal-subtitle" style="text-align: center; margin-bottom: 20px;">Creator • Developer • Lifelong Learner</div>
+              </div>
+    
+                <!-- 详细说明（全英文） -->
+             <div class="modal-content" style="text-align: left;">
                 <p>
                     Hi! I'm Dior. I'm currently focused on content creation and building my own digital websites from scratch. 
                 </p>
@@ -269,7 +289,7 @@
                     I am a passionate learner who loves exploring new skills and knowledge. 
                 </p>
                 <p>
-                    <strong>Languages:</strong><br>
+                     <strong>Languages:</strong><br>
                     • <strong>Chinese:</strong> Native speaker (Full mastery)<br>
                     • <strong>English:</strong> Self-taught, fluent enough for normal daily communication<br>
                     • <strong>Japanese:</strong> Self-taught, basic knowledge (a little bit)
@@ -277,31 +297,28 @@
             </div>
         </div>
     </div>
-    
-    <!-- 3. 弹窗 2：Blog -->
-    <div class="modal-overlay" id="blogModal">
-        <div class="modal-card">
-            <button class="close-btn" id="closeBlog">&times;</button>
-            <h2 class="modal-title">📝 My Blog</h2>
-            <div class="modal-subtitle">Thoughts • Notes • Updates</div>
 
-            <div class="modal-content">
-                <p><strong>📅 November 2026: Setting Sail</strong><br>
-                Today I officially built and polished my digital home from scratch. No prior experience, just pure curiosity, AI collaboration, and code!</p>
-                
-                <p><strong>💡 What's next:</strong><br>
-                More building logs, trial-and-error stories, and tech notes will be shared here as my journey unfolds.</p>
-            </div>
+    <!-- 弹窗：Blog（支持拖拽、无背景模糊） -->
+    <div class="modal-card" id="blogModal">
+        <div class="modal-header">
+            <span class="modal-title" style="font-size: 18px;">📝 My Blog</span>
+            <button class="close-btn" onclick="closeModal('blogModal')" style="position: static; font-size: 22px;">&times;</button>
         </div>
-    </div>
+        <div class="modal-content">
+            <p><strong>📅 November 2026: Setting Sail</strong><br>
+            Today I officially built and polished my digital home from scratch. No prior experience, just pure curiosity, AI collaboration, and code!</p>
+                
+            <p><strong>💡 What's next:</strong><br>
+            More building logs, trial-and-error stories, and tech notes will be shared here as my journey unfolds.</p>
+        </div>
+     </div>
 
-    <!-- 4. 弹窗 3：Links (社媒矩阵) -->
-    <div class="modal-overlay" id="linksModal">
-        <div class="modal-card">
-            <button class="close-btn" id="closeLinks">&times;</button>
-            <h2 class="modal-title">🔗 My Links</h2>
-            <div class="modal-subtitle">Connect with me across the web</div>
-
+    <!-- 弹窗：Links（支持拖拽、无背景模糊） -->
+    <div class="modal-card" id="linksModal">
+        <div class="modal-header">
+            <span class="modal-title" style="font-size: 18px;">🔗 My Links</span>
+            <button class="close-btn" onclick="closeModal('linksModal')" style="position: static; font-size: 22px;">&times;</button>
+        </div>
             <div class="modal-content" style="display: flex; flex-direction: column; gap: 10px;">
                 <p style="margin-bottom: 4px; font-size: 14px;">Find and follow my creator journey here:</p>
                 <a href="https://youtube.com/@DioBranduo" target="_blank" class="btn btn-secondary" style="text-align: center; display: block; text-decoration: none;">📺 YouTube Channel</a>
@@ -310,27 +327,70 @@
                 <a href="https://discord.gg/dior-code" target="_blank" class="btn btn-secondary" style="text-align: center; display: block; text-decoration: none;">💬 Discord Community</a>
             </div>
         </div>
-    </div>
 
-    <!-- 5. 交互 JavaScript 逻辑（完美整合版，无任何冲突） -->
     <script>
-        // 通用弹窗控制函数
-        function setupModal(openId, closeId, modalId) {
-            const openBtn = document.getElementById(openId);
-            const closeBtn = document.getElementById(closeId);
-            const modal = document.getElementById(modalId);
+    let highestZIndex = 100; // 用于管理多窗口的前后层级
 
-            openBtn.addEventListener('click', () => modal.classList.add('active'));
-            closeBtn.addEventListener('click', () => modal.classList.remove('active'));
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) modal.classList.remove('active');
-            });
+    // 打开指定弹窗并将其置顶
+    function openModal(id) {
+        const modal = document.getElementById(id);
+        modal.style.display = 'block';
+        highestZIndex++;
+        modal.style.zIndex = highestZIndex;
+    }
+
+    // 关闭指定弹窗
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    // 为所有弹窗绑定“拖拽”与“点击置顶”功能
+    document.querySelectorAll('.modal-card').forEach(modal => {
+        const header = modal.querySelector('.modal-header');
+
+        // 鼠标点击任意弹窗时，提升其层级到最前
+        modal.addEventListener('mousedown', () => {
+            highestZIndex++;
+            modal.style.zIndex = highestZIndex;
+        });
+
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        // 在标题栏按下鼠标开始拖拽
+        header.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+
+            const rect = modal.getBoundingClientRect();
+            initialLeft = rect.left;
+            initialTop = rect.top;
+
+            // 清除居中的 transform，改用像素绝对定位
+            modal.style.transform = 'none';
+            modal.style.left = initialLeft + 'px';
+            modal.style.top = initialTop + 'px';
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+        function onMouseMove(e) {
+            if (!isDragging) return;
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+
+            modal.style.left = (initialLeft + deltaX) + 'px';
+            modal.style.top = (initialTop + deltaY) + 'px';
         }
 
-        // 初始化所有弹窗
-        setupModal('openAbout', 'closeAbout', 'aboutModal');
-        setupModal('openBlog', 'closeBlog', 'blogModal');
-        setupModal('openLinks', 'closeLinks', 'linksModal');
-    </script>
+        function onMouseUp() {
+            isDragging = false;
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        }
+    });
+</script>
 </body>
 </html>
