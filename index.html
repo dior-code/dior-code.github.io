@@ -261,6 +261,38 @@
             margin-top: 8px;
             font-weight: 500;
         }
+
+        /* 音乐开关胶囊样式 */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f8fafc;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 1000;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .music-control:hover {
+            background: rgba(59, 130, 246, 0.5);
+            transform: scale(1.05);
+        }
+        /* 播放时的旋转动画 */
+        .playing {
+            animation: rotate 3s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -344,7 +376,16 @@
                 <a href="https://discord.gg/dior-code" target="_blank" class="btn btn-secondary" style="text-align: center; display: block; text-decoration: none;">💬 Discord Community</a>
             </div>
         </div>
-
+        <!-- 网页右上角的音乐播放器开关 -->
+        <div class="music-control" id="musicToggle" onclick="toggleMusic()">
+            <span id="musicIcon">🎵</span>
+            <span id="musicText">Play Music</span>
+        </div>
+        
+        <!-- 隐藏的音频标签：loop 代表循环播放，src 换成你的音乐直链 -->
+        <audio id="bgm" loop>
+            <source src="你的音乐链接.mp3" type="audio/mpeg">
+        </audio>
     <script>
     let highestZIndex = 100; // 用于管理多窗口的前后层级
 
@@ -430,6 +471,25 @@
             document.removeEventListener('mouseup', onMouseUp);
         }
     });
+        
+    function toggleMusic() {
+        const bgm = document.getElementById('bgm');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicText = document.getElementById('musicText');
+        
+        if (bgm.paused) {
+            bgm.play().then(() => {
+                musicIcon.classList.add('playing');
+                musicText.innerText = 'Pause Music';
+            }).catch(error => {
+                console.log("Autoplay was blocked by the browser, manual click required", error);
+            });
+        } else {
+            bgm.pause();
+            musicIcon.classList.remove('playing');
+            musicText.innerText = 'Play Music';
+        }
+    }
 </script>
 </body>
 </html>
