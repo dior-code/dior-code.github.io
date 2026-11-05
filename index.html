@@ -168,15 +168,26 @@
             display: flex;
             flex-direction: column;
             /* 保持原有的 position: fixed; 等样式不变 ... */
-            width: 90%;
-            max-width: 420px;
+            
+            /* 💡 响应式宽度调整 */
+            width: 92%;          /* 在手机上自动占屏幕宽度的 92% */
+            max-width: 680px;    /* 在电脑上最大可以舒展到 680px（你可以改成 700px 或更大） */
+            
             border-radius: 20px;
-            padding: 28px;
+            padding: 32px;       /* 电脑端宽敞的内边距 */
             border: 1px solid var(--border-color);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
             display: none; /* 默认隐藏 */
             z-index: 100;
             user-select: none; /* 防止拖拽时选中文字 */
+        }
+
+        /* 💡 针对手机小屏幕的自适应微调 */
+        @media (max-width: 600px) {
+            .modal-card {
+                width: 95%;      /* 手机上更贴边，不浪费空间 */
+                padding: 20px;   /* 手机上内边距稍微缩小，腾出更多位置显示文字 */
+            } 
         }
 
         .modal-header {
