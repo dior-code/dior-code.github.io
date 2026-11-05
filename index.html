@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Markdown 自动解析脚本 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <title>dior-code | Digital HQ</title>
     <style>
         :root {
@@ -304,12 +306,9 @@
             <span class="modal-title" style="font-size: 18px;">📝 My Blog</span>
             <button class="close-btn" onclick="closeModal('blogModal')" style="position: static; font-size: 22px;">&times;</button>
         </div>
-        <div class="modal-content">
-            <p><strong>📅 November 2026: Setting Sail</strong><br>
-            Today I officially built and polished my digital home from scratch. No prior experience, just pure curiosity, AI collaboration, and code!</p>
-                
-            <p><strong>💡 What's next:</strong><br>
-            More building logs, trial-and-error stories, and tech notes will be shared here as my journey unfolds.</p>
+        <!-- 这里是用来自动显示 Markdown 文章的容器 -->
+        <div class="modal-content" id="blogContent">
+            <p style="color: var(--text-muted);">Loading post...</p>
         </div>
      </div>
 
@@ -331,12 +330,33 @@
     <script>
     let highestZIndex = 100; // 用于管理多窗口的前后层级
 
-    // 打开指定弹窗并将其置顶
+    // 自动加载 Markdown 文章的函数
+    function loadBlogPost(filePath) {
+        const blogContent = document.getElementById('blogContent');
+        fetch(filePath)
+            .then(response => {
+                if (!response.ok) throw new Error('Post not found');
+                return response.text();
+            })
+            .then(markdownText => {
+                // 将 Markdown 语法自动转为 HTML 并渲染到页面上
+                blogContent.innerHTML = marked.parse(markdownText);
+            })
+            .catch(err => {
+                blogContent.innerHTML = '<p>Failed to load post. Please check the file path.</p>';
+            });
+    }
+    // 修改你的 openModal 函数，加上对 Blog 的判断
     function openModal(id) {
         const modal = document.getElementById(id);
         modal.style.display = 'block';
         highestZIndex++;
         modal.style.zIndex = highestZIndex;
+
+        // 如果打开的是 Blog 弹窗，就自动去加载 posts/post1.md
+        if (id === 'blogModal') {
+            loadBlogPost('posts/post1.md');
+        }
     }
 
     // 关闭指定弹窗
