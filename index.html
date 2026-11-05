@@ -172,6 +172,11 @@
             display: none; /* 默认隐藏 */
             z-index: 100;
             user-select: none; /* 防止拖拽时选中文字 */
+            /* 把原先的 top: 50% 配合限制最大高度 */
+            max-height: 85vh; /* 限制弹窗最高只能占屏幕高度的 85%，绝不超出屏幕 */
+            display: flex;
+            flex-direction: column;
+            /* 保持原有的 position: fixed; 等样式不变 ... */
         }
 
         .modal-header {
@@ -226,6 +231,8 @@
             font-size: 14.5px;
             line-height: 1.7;
             text-align: left;
+            overflow-y: auto; /* 当文字太长时，只在内容区域内部显示滚动条，顶部标题栏不动 */
+            /* 保持原有的样式不变 ... */
         }
 
         .modal-content p {
