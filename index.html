@@ -387,6 +387,13 @@
         <audio id="bgm" loop>
             <source src="Canon.mp3" type="audio/mpeg">
         </audio>
+
+    <!-- 左上角的主题切换开关 -->
+    <div class="theme-control" id="themeToggle" onclick="toggleTheme()">
+        <span id="themeIcon">☀️</span>
+        <span id="themeText">Light</span>
+    </div>
+    
     <script>
     let highestZIndex = 100; // 用于管理多窗口的前后层级
 
@@ -491,6 +498,23 @@
             musicText.innerText = 'Play Music';
         }
     }
+
+    function toggleTheme() {
+        const body = document.body;
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        body.classList.toggle('light-theme');
+        
+        if (body.classList.contains('light-theme')) {
+            themeIcon.innerText = '🌙';
+            themeText.innerText = 'Dark';
+        } else {
+            themeIcon.innerText = '☀️';
+            themeText.innerText = 'Light';
+        }
+    }
+        
 </script>
 </body>
 </html>
