@@ -16,6 +16,9 @@
             --accent: #38bdf8;
             --accent-hover: #0ea5e9;
             --border-color: rgba(255, 255, 255, 0.08);
+            --bg-dark: url('Shirakawa-go.jpg') no-repeat center center fixed;
+            --bg-light: url('bg-light.jpg') no-repeat center center fixed; /* 如果有日间图可以改这里 */
+            --bg-current: var(--bg-dark);
         }
 
         * {
@@ -25,9 +28,8 @@
         }
 
         body {
-            /* 这里的 'bg.jpg' 就是你上传到仓库里的图片文件名 */
-            background: url('Shirakawa-go.jpg') no-repeat center center fixed;
-            background-size: cover; /* 让图片自动撑满全屏，不变形 */
+            background: var(--bg-current);
+            background-size: cover;
             color: var(--text-main);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             display: flex;
@@ -36,6 +38,18 @@
             min-height: 100vh;
             overflow: hidden;
             position: relative;
+            transition: background 0.5s ease;
+        }
+        
+        /* 当点击切换到 Light 模式时自动改变变量 */
+        body.light-theme {
+            --bg-current: var(--bg-light);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --modal-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent: #0284c7;
+            --border-color: rgba(0, 0, 0, 0.1);
         }
 
         /* 动态氛围微光背景 */
@@ -294,6 +308,33 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
+        /* 左上角主题切换开关的专属样式 */
+        .theme-control {
+            position: fixed;
+            top: 20px;
+            left: 20px; /* 强制固定在左上角 */
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 1000;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .theme-control:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+        
     </style>
 </head>
 <body>
