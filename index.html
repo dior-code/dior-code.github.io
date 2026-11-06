@@ -38,11 +38,11 @@
             height: 100vh;
             background: var(--bg-current);
             background-size: cover;
-            z-index: -2; /* 确保在所有内容的底层 */
-            transition: background 0.8s ease-in-out; /* 背景切换的丝滑过渡 */
+            background-position: center;
+            z-index: -2;
+            transition: background 0.8s ease-in-out;
         }
         
-        /* 确保 body 自身不加背景，只负责文字颜色过渡 */
         body {
             background-color: transparent;
             color: var(--text-main);
@@ -51,10 +51,12 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            width: 100vw;         /* 强制宽度等于视口宽度 */
+            overflow-x: hidden;   /* 关键：严禁任何水平方向的溢出和缩小时的白边 */
             position: relative;
             transition: color 0.3s ease;
         }
+
         
         /* 白天模式下的变量与背景切换 */
         body.light-theme {
