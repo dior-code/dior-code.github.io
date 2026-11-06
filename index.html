@@ -326,7 +326,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            z-index: 1000;
+            z-index: 10;
             transition: all 0.2s;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
@@ -460,7 +460,7 @@
         const modal = document.getElementById(id);
         modal.style.display = 'flex';
         highestZIndex++;
-        modal.style.zIndex = highestZIndex;
+        modal.style.zIndex = highestZIndex;// 点击哪个弹窗，哪个就升到最顶层（101、102...）
 
         // 如果打开的是 Blog 弹窗，就自动去加载 posts/post1.md
         if (id === 'blogModal') {
