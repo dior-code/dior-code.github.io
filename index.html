@@ -16,8 +16,10 @@
             --accent: #38bdf8;
             --accent-hover: #0ea5e9;
             --border-color: rgba(255, 255, 255, 0.08);
+            
+            /* 定义双背景图：夜间用你的白川乡，白天用你的日间图（可把 bg-light.jpg 换成你的日间图片名） */
             --bg-dark: url('Shirakawa-go.jpg') no-repeat center center fixed;
-            --bg-light: url('bg-light.jpg') no-repeat center center fixed; /* 如果有日间图可以改这里 */
+            --bg-light: url('bg-light.jpg') no-repeat center center fixed; 
             --bg-current: var(--bg-dark);
         }
 
@@ -34,15 +36,15 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: url('Shirakawa-go.jpg') no-repeat center center fixed;
+            background: var(--bg-current);
             background-size: cover;
             z-index: -2; /* 确保在所有内容的底层 */
-            transition: opacity 0.6s ease-in-out; /* 核心：0.6秒的丝滑淡入淡出过渡 */
+            transition: background 0.8s ease-in-out; /* 背景切换的丝滑过渡 */
         }
         
-        /* 确保 body 自身不再直接加死背景图，只负责颜色过渡 */
+        /* 确保 body 自身不加背景，只负责文字颜色过渡 */
         body {
-            background-color: #07090e;
+            background-color: transparent;
             color: var(--text-main);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             display: flex;
@@ -54,19 +56,21 @@
             transition: color 0.3s ease;
         }
         
-        /* 白天模式下的背景图与颜色变量 */
+        /* 白天模式下的变量与背景切换 */
         body.light-theme {
             --card-bg: rgba(255, 255, 255, 0.85);
             --modal-bg: #ffffff;
             --text-main: #0f172a;
             --text-muted: #475569;
             --accent: #0284c7;
+            --accent-hover: #0369a1;
             --border-color: rgba(0, 0, 0, 0.1);
+            --bg-current: var(--bg-light); /* 切换到白天背景图 */
         }
         
-        /* 当切换到白天模式时，通过改变背景层的图片或透明度来实现过渡 */
+        /* 让背景层的背景也同步变量实现切换 */
         body.light-theme .bg-layer {
-            background: url('bg-light.jpg') no-repeat center center fixed; /* 替换成你的日间背景图 */
+            background: var(--bg-light);
             background-size: cover;
         }
 
