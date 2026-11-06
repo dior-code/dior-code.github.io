@@ -264,23 +264,24 @@
 
         /* 音乐开关胶囊样式 */
         .music-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(30, 41, 59, 0.7);
+            position: absolute; /* 改为绝对定位，相对于大卡片对齐 */
+            top: 24px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.08); /* 稍微调配一下背景让它更通透 */
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #f8fafc;
-            padding: 8px 16px;
-            border-radius: 30px;
+            padding: 6px 14px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
             display: flex;
             align-items: center;
             gap: 6px;
-            z-index: 1000;
+            z-index: 10;
             transition: background 0.2s, transform 0.1s;
         }
+        
         .music-control:hover {
             background: rgba(59, 130, 246, 0.5);
             transform: scale(1.05);
