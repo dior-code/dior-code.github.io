@@ -278,7 +278,7 @@
 
         /* 音乐开关胶囊样式 */
         .music-control {
-            position: fixed; /* 改为绝对定位，相对于大卡片对齐 */
+            position: fixed; 
             top: 24px;
             right: 24px;
             background: rgba(255, 255, 255, 0.08); /* 稍微调配一下背景让它更通透 */
@@ -529,14 +529,14 @@
         if (bgm.paused) {
             bgm.play().then(() => {
                 musicIcon.classList.add('playing');
-                musicText.innerText = 'Pause Music';
+                //musicText.innerText = 'Pause Music';
             }).catch(error => {
                 console.log("Autoplay was blocked by the browser, manual click required", error);
             });
         } else {
             bgm.pause();
             musicIcon.classList.remove('playing');
-            musicText.innerText = 'Play Music';
+            //musicText.innerText = 'Play Music';
         }
     }
 
@@ -549,10 +549,10 @@
         
         if (body.classList.contains('light-theme')) {
             themeIcon.innerText = '🌙';
-            themeText.innerText = 'Dark';
+            //themeText.innerText = 'Dark';
         } else {
             themeIcon.innerText = '☀️';
-            themeText.innerText = 'Light';
+            //themeText.innerText = 'Light';
         }
     }
         
